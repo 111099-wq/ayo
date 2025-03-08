@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yuk, Balikan?</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Apakah Kamu Mau Balikan?</h1>
+        </header>
+        
+        <section class="form-section">
+            <form id="questionForm">
+                <p>Masukkan jawabanmu: </p>
+                <input type="radio" id="yes" name="answer" value="yes" onclick="enableSubmit()">
+                <label for="yes">Iya, mau!</label><br>
+                
+                <input type="radio" id="no" name="answer" value="no" onclick="disableNoButton()">
+                <label for="no" id="noLabel">Tidak, terimakasih.</label><br>
+                
+                <button type="submit" id="submitButton" disabled>Kirim Jawaban</button>
+            </form>
+        </section>
+    </div>
+
+    <script>
+        // Fungsi untuk mengaktifkan tombol Kirim setelah memilih 'Iya'
+        function enableSubmit() {
+            document.getElementById("submitButton").disabled = false;
+            document.getElementById("no").disabled = true;  // Menonaktifkan tombol 'Tidak'
+            document.getElementById("noLabel").style.display = 'none';  // Menyembunyikan label 'Tidak'
+        }
+
+        // Fungsi untuk menonaktifkan tombol 'Tidak'
+        function disableNoButton() {
+            document.getElementById("no").disabled = true;
+            document.getElementById("noLabel").style.display = 'none';  // Menyembunyikan label 'Tidak'
+        }
+
+        // Fungsi saat form disubmit
+        document.getElementById("questionForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const answer = document.querySelector('input[name="answer"]:checked')?.value;
+            if (answer === "yes") {
+                window.location.href = "page2.html";  // Arahkan ke halaman kedua jika 'Iya'
+            } else {
+                window.location.href = "page3.html";  // Arahkan ke halaman ketiga jika 'Tidak'
+            }
+        });
+    </script>
+</body>
+</html>
